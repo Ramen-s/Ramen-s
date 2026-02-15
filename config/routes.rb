@@ -1,15 +1,63 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # =========================================================
+  # devise（顧客/管理者）
+  # ※ controller名はチームの実装に合わせて後で変更OK
+  # =========================================================
+  devise_for :customers, skip: [:passwords], controllers: {
+    registrations: "public/registrations",
+    sessions: "public/sessions"
+  }
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+    sessions: "admin/sessions"
+  }
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+  # =========================================================
+  # public（顧客側）
+  # =========================================================
+  scope module: :public do
+    root "homes#top"
+    get "about" => "homes#about"
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+    resources :items, only: [:index, :show]
+
+    # customers（マイページ・編集・退会）
+    get  "customers/my_page"            => "customers#show"
+    get  "customers/information/edit"   => "customers#edit"
+    patch "customers/information"       => "customers#update"
+    get  "customers/unsubscribe"        => "customers#unsubscribe"
+    patch "customers/withdraw"          => "customers#withdraw"
+
+    # cart_items
+    resources :cart_items, only: [:index, :create, :update, :destroy] do
+      collection do
+        delete :destroy_all
+      end
+    end
+
+    # orders（confirm / thanks を独自アクション）
+    resources :orders, only: [:new, :create, :index, :show] do
+      collection do
+        post :confirm     # ここはPOST推奨（フォーム内容を送って確認画面へ）
+        get  :thanks
+      end
+    end
+
+    # addresses（配送先）
+    resources :addresses, only: [:index, :create, :edit, :update, :destroy]
+  end
+
+  # =========================================================
+  # admin（管理者側）
+  # =========================================================
+  namespace :admin do
+    get "/" => "homes#top"
+
+    resources :items, only: [:index, :new, :create, :show, :edit, :update]
+    resources :genres, only: [:index, :create, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update]
+
+    resources :orders, only: [:show, :update]
+    resources :order_details, only: [:update]
+  end
 end
