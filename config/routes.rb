@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   # public（顧客側）
   # =========================================================
   scope module: :public do
-    root "homes#top"
+    #root "homes#top"
+    root "addresses#index"
     get "about" => "homes#about"
 
     resources :items, only: [:index, :show]
