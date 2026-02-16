@@ -1,3 +1,3 @@
 class Admin < ApplicationRecord
-  # devise :database_authenticatable, :rememberable, :validatable
+  devise :database_authenticatable, :rememberable,:validatable
 end
