@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :public do
+    get "homes/top"
+    get "homes/about"
+  end
   # =========================================================
   # devise（顧客/管理者）
   # ※ controller名はチームの実装に合わせて後で変更OK
