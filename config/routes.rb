@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     sessions: "public/sessions"
   }
 
-  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+  devise_for skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
 
@@ -20,7 +20,8 @@ Rails.application.routes.draw do
   # public（顧客側）
   # =========================================================
   scope module: :public do
-    root "homes#top"
+    #root "homes#top"
+    root "addresses#index"
     get "about" => "homes#about"
 
     resources :items, only: [:index, :show]
@@ -54,6 +55,9 @@ Rails.application.routes.draw do
   # =========================================================
   # admin（管理者側）
   # =========================================================
+  devise_for :admin, skip: [:registrations, :passwords], controllers:{
+    sessions: "admin/sessions"
+  }
   namespace :admin do
     get "/" => "homes#top"
 
