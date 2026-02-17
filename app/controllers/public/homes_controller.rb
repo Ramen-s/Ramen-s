@@ -9,5 +9,9 @@ end
 
   def about
   end
+<<<<<<< HEAD
+end
+>>>>>>> develop
+=======
 end
 >>>>>>> develop
