@@ -1,11 +1,10 @@
 class Admin::ItemsController < ApplicationController
-  # TODO: 管理者認証（devise）を入れているなら後で有効化
   # before_action :authenticate_admin!
 
   before_action :set_item, only: [:show, :edit, :update]
 
   def index
-    @items = Item.order(created_at: :desc)
+    @items = Item.includes(:genre).order(created_at: :desc)
   end
 
   def show
