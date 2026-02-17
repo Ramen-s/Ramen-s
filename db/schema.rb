@@ -19,6 +19,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_17_065346) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_addresses_on_customer_id"
+
   end
 
   create_table "admins", force: :cascade do |t|
@@ -31,6 +32,14 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_17_065346) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "cart_items", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "customer_id"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "customers", force: :cascade do |t|
