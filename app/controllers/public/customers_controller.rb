@@ -6,7 +6,11 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = current_customer || Customer.first || Customer.new(name: "testuser", email: "test@example.com")   # 左（顧客）
-
+    #@customer.kana
+    #@customer.postal_code
+    #@customer.address
+    #@customer.telephone_number
+    #@customer.email
   end
 
   def edit; end
