@@ -1,9 +1,14 @@
 class Public::ItemsController < ApplicationController
   def index
-    @items = Item.where(is_active: true).order(created_at: :desc)
+    @genres = Genre.order(:id)
+
+    scope = Item.where(is_active: true).includes(:genre).order(created_at: :desc)
+    scope = scope.where(genre_id: params[:genre_id]) if params[:genre_id].present?
+    @items = scope
   end
 
   def show
-    @item = Item.where(is_active: true).find(params[:id])
+    @genres = Genre.order(:id)
+    @item = Item.where(is_active: true).includes(:genre).find(params[:id])
   end
 end

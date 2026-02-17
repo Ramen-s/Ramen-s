@@ -1,6 +1,38 @@
-<h1><%= @item.name %></h1>
+<h1>商品詳細</h1>
 
-<p><%= @item.introduction %></p>
-<p>価格：<%= @item.price %>円</p>
+<div style="display:flex; gap:24px; align-items:flex-start;">
+  <!-- 左：ジャンル検索 -->
+  <aside style="min-width:200px;">
+    <h2 style="font-size:18px;">ジャンル検索</h2>
+    <ul style="list-style:none; padding-left:0;">
+      <li><%= link_to "全て", items_path %></li>
+      <% @genres.each do |genre| %>
+        <li><%= link_to genre.name, items_path(genre_id: genre.id) %></li>
+      <% end %>
+    </ul>
+  </aside>
 
-<p><%= link_to "商品一覧へ戻る", items_path %></p>
+  <!-- 右：商品詳細 -->
+  <main style="flex:1;">
+    <div style="display:flex; gap:16px;">
+      <!-- 画像未実装：枠だけ -->
+      <div style="width:260px;">
+        <div style="background:#f3f3f3; height:220px;"></div>
+      </div>
+
+      <div style="flex:1;">
+        <h2 style="margin-top:0;"><%= @item.name %></h2>
+
+        <% if @item.genre %>
+          <p style="color:#666;">ジャンル：<%= @item.genre.name %></p>
+        <% end %>
+
+        <p><%= @item.introduction %></p>
+
+        <p style="font-size:18px;">価格：¥<%= @item.price %></p>
+
+        <p><%= link_to "商品一覧へ戻る", items_path %></p>
+      </div>
+    </div>
+  </main>
+</div>
