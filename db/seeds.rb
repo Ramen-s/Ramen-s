@@ -7,3 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+Admin.find_or_create_by!(email: "admin@example.com") do |admin|
+  admin.password = "password"
+end
+puts "管理者の初期データ作成が完了しました。"
