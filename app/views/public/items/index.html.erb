@@ -1,10 +1,50 @@
-<h1>商品一覧</h1>
+<% title = @selected_genre ? "#{@selected_genre.name}一覧" : "商品一覧" %>
 
-<ul>
-  <% @items.each do |item| %>
-    <li>
-      <%= link_to item.name, item_path(item) %>
-      （<%= item.price %>円）
-    </li>
-  <% end %>
-</ul>
+<div style="max-width:1100px; margin:0 auto; padding:24px 16px;">
+  <div style="display:flex; gap:28px; align-items:flex-start;">
+
+    <!-- 左：ジャンル検索（枠付き） -->
+    <aside style="width:220px;">
+      <div style="border:1px solid #ddd;">
+        <div style="padding:10px 12px; border-bottom:1px solid #ddd; font-weight:600; text-align:center;">
+          ジャンル検索
+        </div>
+        <div style="padding:10px 12px;">
+          <ul style="list-style:none; padding-left:0; margin:0;">
+            <li style="margin:6px 0;"><%= link_to "全て", items_path %></li>
+            <% @genres.each do |genre| %>
+              <li style="margin:6px 0;">
+                <%= link_to genre.name, items_path(genre_id: genre.id) %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 右：商品一覧 -->
+    <main style="flex:1;">
+      <h1 style="margin:0 0 14px 0;">
+        <%= title %> <span style="font-size:14px; font-weight:400;">（全<%= @items_count %>件）</span>
+      </h1>
+
+      <div style="display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:18px;">
+        <% @items.each do |item| %>
+          <div>
+            <!-- 画像未実装：枠だけ -->
+            <div style="border:1px solid #ddd; background:#f3f3f3; height:120px;"></div>
+
+            <div style="margin-top:8px;">
+              <%= link_to item.name, item_path(item) %>
+            </div>
+
+            <div style="margin-top:4px; font-weight:600;">
+              ¥<%= item.price %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </main>
+
+  </div>
+</div>

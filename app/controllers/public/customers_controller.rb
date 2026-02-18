@@ -1,4 +1,5 @@
 class Public::CustomersController < ApplicationController
+
   # サインアップ（new, create）はログイン前に行うため
   #allow_unauthenticated_access only: [:new, :create]
 
@@ -11,6 +12,10 @@ class Public::CustomersController < ApplicationController
     #@customer.address
     #@customer.telephone_number
     #@customer.email
+
+    #mainでこれに変更！！！！
+    #@customer  = Current.session.user   # 左（顧客）
+
   end
 
   def edit; end
