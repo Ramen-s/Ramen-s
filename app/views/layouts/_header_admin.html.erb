@@ -1,0 +1,24 @@
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <%= link_to "LOGO", (defined?(admin_root_path) ? admin_root_path : "/admin"), class: "logo" %>
+    </div>
+
+    <nav class="header-nav">
+      <%= link_to "商品一覧", (defined?(admin_items_path) ? admin_items_path : "/admin/items"), class: "nav-btn" %>
+      <%= link_to "会員一覧", (defined?(admin_customers_path) ? admin_customers_path : "#"), class: "nav-btn" %>
+      <%= link_to "注文履歴一覧", (defined?(admin_orders_path) ? admin_orders_path : "#"), class: "nav-btn" %>
+      <%= link_to "ジャンル一覧", (defined?(admin_genres_path) ? admin_genres_path : "#"), class: "nav-btn" %>
+
+      <% if defined?(destroy_admin_session_path) %>
+        <%= link_to "ログアウト", destroy_admin_session_path, data: { turbo_method: :delete }, class: "nav-btn" %>
+      <% else %>
+        <%= link_to "ログアウト", "#", class: "nav-btn" %>
+      <% end %>
+    </nav>
+
+    <div class="header-search">
+      <input type="text" placeholder="Search" />
+    </div>
+  </div>
+</header>
