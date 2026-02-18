@@ -5,4 +5,330 @@
 /* エラー時のレイアウト崩れを防ぐ */
 .field_with_errors {
   display: contents;
+}/*
+ *= require_tree .
+ *= require_self
+ */
+
+/* ===== Header clean layout ===== */
+
+.nc-header {
+  border-bottom: 1px solid #000;
+  padding: 36px 18px 12px;
+  background: #fff;
 }
+
+.nc-header__inner{
+  display: flex;
+  align-items: center;
+  max-width: auto;       /* 好みで */
+  min-height: 80px; 
+  margin: 0 auto;          /* これで中央寄せ */
+  width: 100%;
+}
+
+
+.nc-logo {
+  padding: 14px 34px;
+  border: 2px solid #333;
+  text-decoration: none;
+  color: #333;
+  font-weight: 700;
+}
+
+/* 右側（ボタン＋検索） */
+.nc-header__right{
+  margin-left: auto;
+  display: grid;
+  justify-items: end;   /* ← 右端揃えを強制 */
+  row-gap: 12px;
+  padding-top: 6px;
+}
+
+
+
+/* ボタン */
+.nc-nav{
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.nc-btn,
+.nc-nav__link {
+  padding: 10px 18px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #333;
+  background: #fff;
+}
+
+/* 検索 */
+.nc-search{
+  position: relative;
+  width: 173px;
+  box-sizing: border-box;
+}
+
+.nc-search__input{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 40px 10px 12px; /* 右にアイコン分の余白 */
+}
+
+.nc-search__icon{
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #1a73e8;
+}
+
+
+/* ===== Header tweaks (right align / taller / narrower search) ===== */
+
+/* ロゴ以外（ボタン+検索）を右に寄せる */
+.nc-header__right{
+  margin-left: auto;            /* これで右側ブロックが右端へ */
+  justify-content: flex-end;
+}
+
+/* ヘッダー高さを今の1.5倍（paddingを増やす） */
+.nc-header{
+  padding: 0 18px 18px;
+}
+
+/* Search幅を今の2/3（260px → 約173px） */
+.nc-search{
+  width: 173px;
+}
+
+/* ===== 商品一覧ページ用 ===== */
+
+.page-title {
+  display: inline-block;
+  background-color: #eee;
+  padding: 6px 16px;
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  background-color: #eee;
+}
+
+th, td {
+  padding: 12px;
+}
+
+td {
+  border-bottom: 1px solid #ddd;
+}
+
+/* ===== 本文中央寄せ ===== */
+.nc-container{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+/* ===== 商品詳細レイアウト ===== */
+.item-show{
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  margin-top: 24px;
+}
+
+.item-show__side{
+  width: 240px;
+}
+
+/* ジャンル枠 */
+.genre-box{
+  border: 1px solid #000;
+  background: #fff;
+  margin-top: 50px;
+  margin-left: 50px;
+}
+
+.genre-box__title{
+  margin: 0;
+  padding: 10px 12px;
+  text-align: center;
+  font-size: 16px;
+  border-bottom: 1px solid #000;
+}
+
+.genre-box__list{
+  list-style: none;
+  margin: 0;
+  padding: 10px 14px;
+  margin-left: 10px;
+}
+
+.genre-box__list li{
+  margin: 8px 0;
+}
+
+/* 右側 */
+.item-detail{
+  display: flex;
+  margin-top: 50px;
+  gap: 24px;
+}
+
+.item-detail__image{
+  width: 320px;
+  margin-right: 10px;
+}
+
+.item-detail__image-dummy{
+  background: #f3f3f3;
+  height: 220px;
+}
+
+.item-detail__name{
+  margin-top: 50px;
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.item-detail__price{
+  margin-top: 50px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.item-detail__tax{
+  font-size: 12px;
+  color: #666;
+  font-weight: normal;
+  margin-left: 6px;
+}
+
+.item-detail__actions{
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.item-detail__qty{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-detail__qty-label{
+  display: inline-block;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  background: #f5f5f5;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.item-detail__qty-select{
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.item-detail__cart-btn{
+  height: 40px;
+  padding: 0 22px;
+  border: none;
+  border-radius: 6px;
+  background: #2eaf4a;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.item-detail__cart-btn:hover{
+  opacity: 0.9;
+}
+
+/* ===== 個数選択（画像みたいな一体型） ===== */
+.qty-select{
+  position: relative;
+  display: inline-block;
+  width: 210px;          /* 好みで調整 */
+}
+
+.qty-select__label{
+  position: absolute;
+  z-index: 3;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #555;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+
+/* select本体（デフォルト矢印を消す） */
+.qty-select{
+  position: relative;
+  display: inline-block;
+  width: 210px;
+  border: 1px solid #bdbdbd;
+  border-radius: 4px;
+  background: #fff;
+  overflow: hidden; /* 右の水色を角丸に沿わせる */
+}
+
+
+.qty-select__select{
+  position: relative;
+  z-index: 2;                 /* ← pseudo要素より上にする */
+  width: 100%;
+  height: 38px;
+  padding: 0 44px 0 86px;     /* 右=▼枠 / 左=ラベル */
+  border: none;               /* 枠は親が持つ */
+  background: transparent;    /* ← 親の水色/白を見せる */
+  outline: none;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+
+.qty-select::after{
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 0;
+  width: 42px;
+  height: 100%;
+  background: #cfe4f6;
+  border-left: 1px solid #bdbdbd;
+  pointer-events: none;
+}
+
+.qty-select::before{
+  content: "▼";
+  position: absolute;
+  z-index: 4;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #fff;
+  pointer-events: none;
+}
+
