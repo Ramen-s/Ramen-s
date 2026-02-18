@@ -19,11 +19,28 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <% if request.path.start_with?("/admin") %>
+      <%# /admin配下 %>
+      <% if defined?(admin_signed_in?) && admin_signed_in? %>
+        <%= render "layouts/header_admin" %>
+      <% else %>
+        <%= render "layouts/header_public_guest" %> <%# PDF仕様：管理者ログイン前=会員ログイン前 %>
+      <% end %>
+    <% else %>
+      <%# public側 %>
+      <% if defined?(customer_signed_in?) && customer_signed_in? %>
+        <%= render "layouts/header_public_customer" %>
+      <% else %>
+        <%= render "layouts/header_public_guest" %>
+      <% end %>
+    <% end %>
+
     <%= yield %>
+
   </body>
 </html>

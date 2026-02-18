@@ -1,0 +1,34 @@
+<header class="nc-header">
+  <div class="nc-header__inner">
+    <%= link_to "LOGO", (defined?(root_path) ? root_path : "/"), class: "nc-logo" %>
+
+    <div class="nc-header__right">
+      <nav class="nc-nav">
+        <%= link_to "About", (defined?(about_path) ? about_path : "/about"), class: "nc-nav__link" %>
+        <%= link_to "商品一覧", (defined?(items_path) ? items_path : "/items"), class: "nc-nav__link" %>
+
+        <% if defined?(new_customer_registration_path) %>
+          <%= link_to "新規登録", new_customer_registration_path, class: "nc-nav__link" %>
+        <% else %>
+          <%= link_to "新規登録", "#", class: "nc-nav__link" %>
+        <% end %>
+
+        <% if defined?(new_customer_session_path) %>
+          <%= link_to "ログイン", new_customer_session_path, class: "nc-nav__link" %>
+        <% else %>
+          <%= link_to "ログイン", "#", class: "nc-nav__link" %>
+        <% end %>
+      </nav>
+
+      <div class="nc-search">
+        <input class="nc-search__input" type="text" placeholder="Search" />
+        <button type="button" class="nc-search__icon" aria-label="Search">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm11 3-6-6"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
