@@ -9,6 +9,7 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
+
 ActiveRecord::Schema[8.0].define(version: 2026_02_18_050704) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -47,7 +48,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_18_050704) do
     t.datetime "updated_at", null: false
   end
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_17_064416) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -109,8 +109,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_17_064416) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  
 end
