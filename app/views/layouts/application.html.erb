@@ -29,7 +29,7 @@
       <% if defined?(admin_signed_in?) && admin_signed_in? %>
         <%= render "layouts/header_admin" %>
       <% else %>
-        <%= render "layouts/header_public_guest" %> <%# PDF仕様：管理者ログイン前=会員ログイン前 %>
+        <%= render "layouts/header_public_guest" %> <%# 管理者ログイン前 %>
       <% end %>
     <% else %>
       <%# public側 %>
@@ -41,6 +41,5 @@
     <% end %>
 
     <%= yield %>
-
   </body>
 </html>
