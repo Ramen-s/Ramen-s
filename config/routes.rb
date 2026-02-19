@@ -16,9 +16,9 @@ Rails.application.routes.draw do
   # public（顧客側）
   # =========================================================
   scope module: :public do
-    root "addresses#index"
+    root "homes#top"
 
-    get "about" => "homes#about"
+    get "about" => "homes#about", as: 'about'
 
     resources :items, only: [:index, :show]
 
@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   # admin（管理者側）
   # =========================================================
   namespace :admin do
+    get "homes/top"
     root "homes#top"
 
     resources :items, only: [:index, :new, :create, :show, :edit, :update]

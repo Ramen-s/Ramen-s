@@ -1,12 +1,13 @@
-<div class="container px-5 px-sm-0">
+<div class="container px-5 px-sm-0 mt-3">
   
-  <!-- タイトルとカート空にするボタン -->
-  <div class="row my-4">
+  <!-- タイトルと「カートを空にする」ボタン -->
+  <div class="row mb-3 align-items-center">
     <div class="col-md-8">
-      <h4 class="bg-light text-dark p-3 d-inline-block">ショッピングカート</h4>
+      <!-- タイトル背景に薄いグレーをつける -->
+      <h4 class="bg-light text-dark p-2 d-inline-block">ショッピングカート</h4>
     </div>
     <div class="col-md-4 text-right">
-      <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, data: { confirm: "カートを空にしますか？" }, class: "btn btn-danger" %>
+      <%= button_to "カートを空にする", destroy_all_cart_items_path, method: :delete, onclick: "return confirm('カートを空にしますか？');", class: "btn btn-danger" %>
     </div>
   </div>
 
@@ -28,34 +29,39 @@
             <tr>
               <!-- 商品画像と名前 -->
               <td class="align-middle">
-                <%# ここで画像表示（ActiveStorageの設定があれば以下のように記述） %>
-                <%# = image_tag cart_item.item.get_image(50, 50), class: "mr-3" %>
-                <span><%= cart_item.item.name %></span>
+                <% if cart_item.item.image.attached? %>
+                  <%= image_tag cart_item.item.image, size: "60x40", style: "object-fit: cover; border: 1px solid #ccc;", class: "mr-2" %>
+                <% else %>
+                  <!-- 画像がない場合のダミー表示 -->
+                  <div class="d-inline-block bg-light text-center border mr-2" style="width: 60px; height: 40px; line-height: 40px; vertical-align: middle;">
+                    <span style="font-size: 10px; color: #aaa;">No Img</span>
+                  </div>
+                <% end %>
+                <span class="font-weight-bold"><%= cart_item.item.name %></span>
               </td>
 
-              <!-- 単価 -->
+              <!-- 単価（税込） -->
               <td class="align-middle">
-                <%= cart_item.item.with_tax_price.to_s(:delimited) %>
+                <%= cart_item.item.with_tax_price.to_fs(:delimited) %>
               </td>
 
               <!-- 数量変更フォーム -->
               <td class="align-middle">
-                <%= form_with model: cart_item, url: cart_item_path(cart_item.id), method: :patch, local: true, class: "form-inline justify-content-center" do |f| %>
-                  <div class="form-group mr-2">
-                    <%= f.number_field :amount, min: 1, max: 10, class: "form-control form-control-sm", style: "width: 60px;" %>
-                  </div>
+                <%= form_with model: cart_item, url: cart_item_path(cart_item.id), method: :patch, local: true, class: "d-flex justify-content-center align-items-center" do |f| %>
+                  <!-- 数量入力欄 -->
+<%= f.select :amount, *[1..10], { selected: cart_item.amount }, class: "form-control form-control-sm mr-2", style: "width: 60px; background: linear-gradient(to right, #ffffff 70%, #d1ecf1 70%);" %>                  <!-- 変更ボタン（緑） -->
                   <%= f.submit "変更", class: "btn btn-success btn-sm" %>
                 <% end %>
               </td>
 
               <!-- 小計 -->
               <td class="align-middle">
-                <%= cart_item.subtotal.to_s(:delimited) %>
+                <%= cart_item.subtotal.to_fs(:delimited) %>
               </td>
 
-              <!-- 削除ボタン -->
+              <!-- 削除ボタン（赤） -->
               <td class="align-middle text-center">
-                <%= link_to "削除する", cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger btn-sm" %>
+                <%= button_to "削除する", cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger btn-sm" %>
               </td>
             </tr>
           <% end %>
@@ -65,7 +71,7 @@
   </div>
 
   <!-- 下部エリア：買い物を続ける & 合計金額 -->
-  <div class="row mt-3 mb-5">
+  <div class="row mt-3 mb-5 justify-content-between">
     <div class="col-md-8">
       <%= link_to "買い物を続ける", root_path, class: "btn btn-primary" %>
     </div>
@@ -73,15 +79,17 @@
     <div class="col-md-4">
       <table class="table table-bordered">
         <tr>
-          <th class="bg-light">合計金額</th>
-          <td><%= @total.to_s(:delimited) %></td>
+          <th class="bg-light w-50">合計金額</th>
+          <td class="w-50 text-right">
+            <%= @total.to_fs(:delimited) %>
+          </td>
         </tr>
       </table>
     </div>
   </div>
 
-  <!-- 情報入力に進むボタン -->
-  <div class="row justify-content-center">
+  <!-- 情報入力に進むボタン（中央・緑） -->
+  <div class="row justify-content-center mb-5">
     <% if @cart_items.present? %>
       <div class="col-md-4 text-center">
         <%= link_to "情報入力に進む", new_order_path, class: "btn btn-success btn-lg btn-block" %>

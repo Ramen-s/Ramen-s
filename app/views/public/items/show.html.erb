@@ -1,6 +1,48 @@
-<h1><%= @item.name %></h1>
+<div class="item-show">
+  <!-- 左：ジャンル検索 -->
+  <aside class="item-show__side">
+    <div class="genre-box">
+      <h2 class="genre-box__title">ジャンル検索</h2>
+      <ul class="genre-box__list">
+        <li><%= link_to "全て", items_path %></li>
+        <% @genres.each do |genre| %>
+          <li><%= link_to genre.name, items_path(genre_id: genre.id) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </aside>
 
-<p><%= @item.introduction %></p>
-<p>価格：<%= @item.price %>円</p>
+  <!-- 右：商品詳細（※「商品詳細」という見出しはそもそも入れない） -->
+  <main class="item-show__main">
+    <div class="item-detail">
+      <!-- 画像未実装：枠だけ -->
+      <div class="item-detail__image">
+        <div class="item-detail__image-dummy"></div>
+      </div>
 
-<p><%= link_to "商品一覧へ戻る", items_path %></p>
+      <div class="item-detail__info">
+        <h2 class="item-detail__name"><%= @item.name %></h2>
+
+        <p class="item-detail__intro"><%= @item.introduction %></p>
+
+        <p class="item-detail__price">
+          ¥ <%= @item.price %> <span class="item-detail__tax">(税込)</span>
+        </p>
+
+        <div class="item-detail__actions">
+          <div class="qty-select">
+            <span class="qty-select__label">個数選択</span>
+            <select class="qty-select__select" name="quantity">
+              <option value="" selected hidden></option>
+              <% (1..10).each do |n| %>
+                <option value="<%= n %>"><%= n %></option>
+              <% end %>
+            </select>
+          </div>
+
+          <button type="button" class="item-detail__cart-btn">カートに入れる</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
