@@ -28,8 +28,7 @@
 
 .nc-header__inner{
   display: flex;
-  align-items: center;
-  max-width: auto;          /* 好みで */
+  align-items: flex-start; /* ←ここで統一 */
   min-height: 80px;
   margin: 0 auto;
   width: 100%;
@@ -46,13 +45,14 @@
   margin-left: 40px;
 }
 
+
 /* 右側（ボタン＋検索） */
-.nc-header__right{
-  align-items: center;
-  display: grid;
-  justify-items: end;       /* 右端揃え */
-  row-gap: 20px;
-  padding-top: 6px;
+.nc-header__right {
+  margin-left: auto;   /* ← これが右寄せの本体 */
+  display: flex;
+  flex-direction: column; /* 上：ボタン 下：検索 の並び */
+  align-items: flex-end;
+  gap: 20px;
   margin-right: 40px;
 }
 
@@ -60,6 +60,7 @@
 .nc-nav{
   display: flex;
   justify-content: flex-end;
+  align-items: flex-start;
   gap: 45px;
 }
 
@@ -71,6 +72,14 @@
   text-decoration: none;
   color: #333;
   background: #fff;
+  display: inline-flex;      /* ←ここが肝 */
+  align-items: center;       /* 文字を上下中央 */
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  height: 40px;       /* ←上端・下端が揃う。36〜44で調整 */
+  padding: 0 18px;    /* ←縦はheightで管理 */
 }
 
 /* 検索 */
@@ -326,4 +335,76 @@ td {
   font-size: 20px;
   color: #fff;
   pointer-events: none;
+}
+
+/* =========================================
+   Responsive: 画面が狭い時だけ崩れを防ぐ
+   （全画面の見た目は変更しない）
+========================================= */
+
+/* まずはPC半分くらいになった時の対策 */
+@media (max-width: 1100px) {
+  /* ヘッダー高さ固定が原因で飛び出すので、狭い時だけ解除 */
+  .nc-header {
+    height: auto;        /* ←200px固定を無効化 */
+    min-height: 120px;   /* 見栄え用（好みで調整） */
+  }
+
+  /* 右側が詰まったら折り返せるようにする */
+  .nc-header__inner{
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  /* LOGOが居座りすぎないように、狭い時だけ縮める */
+  .nc-logo{
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0;          /* 40px固定をやめる */
+    padding: 12px 40px;      /* 80px → 40px */
+    font-size: 34px;         /* 45px → 34px */
+  }
+
+  /* 右側ブロックは右寄せのまま、幅いっぱい使えるように */
+  .nc-header__right{
+    width: 100%;
+    margin-right: 0;         /* 40px固定をやめる */
+  }
+
+  /* ボタンは折り返してもOK。ただし文字は折らない */
+  .nc-nav{
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .nc-btn,
+  .nc-nav__link{
+    white-space: nowrap;     /* ←縦長（1文字ずつ改行）を防ぐ */
+  }
+
+  /* 検索幅を可変にして、はみ出しを防ぐ */
+  .nc-search{
+    width: min(320px, 100%);
+  }
+}
+
+/* もっと狭い時（スマホ/極小ウィンドウ）用：縦積みに切り替える */
+@media (max-width: 700px) {
+  .nc-header__right{
+    align-items: stretch; /* 右寄せより、幅いっぱいの方が安定 */
+  }
+
+  .nc-nav{
+    justify-content: flex-start;
+  }
+
+  .nc-search{
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1100px) {
+  .nc-logo{
+    margin-top: 0;  /* ←狭い時は余計なズレを作らない */
+  }
 }
