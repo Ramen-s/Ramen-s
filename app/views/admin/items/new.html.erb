@@ -1,5 +1,15 @@
-<h1>商品新規登録</h1>
+<%# app/views/admin/items/new.html.erb %>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <h2 class="mb-4 bg-light text-center py-2">商品新規登録</h2>
 
-<%= render "form", item: @item %>
+      <%# ここで部品（_form.html.erb）を呼び出します %>
+      <%= render "form", item: @item %>
 
-<p><%= link_to "一覧へ戻る", admin_items_path %></p>
+      <div class="text-center mt-3">
+        <%= link_to "一覧へ戻る", admin_items_path, class: "text-primary text-decoration-underline" %>
+      </div>
+    </div>
+  </div>
+</div>
