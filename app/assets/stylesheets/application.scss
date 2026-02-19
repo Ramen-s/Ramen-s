@@ -1,5 +1,5 @@
 @import "bootstrap";
-//@import "font-awesome-sprockets"; 
+//@import "font-awesome-sprockets";
 //@import "font-awesome";
 
 /* エラー時のレイアウト崩れを防ぐ */
@@ -407,4 +407,33 @@ td {
   .nc-logo{
     margin-top: 0;  /* ←狭い時は余計なズレを作らない */
   }
+}
+/* ===== customer show ===== */
+
+.customer-show .customer-show-table {
+  width: 75%;
+}
+
+.customer-show .customer-show-table th {
+  width: 180px;
+  white-space: nowrap;
+}
+
+/* customer_見出し＋ボタン横並び */
+
+.customer-show-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.customer-show-label {
+  font-weight: 700;
+  margin: 0;
+  width: 120px;
+}
+
+.customer-show-btn {
+  margin-left: 12px;
+  min-width: 120px;
 }

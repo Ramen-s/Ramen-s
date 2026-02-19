@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <div class="row">
-    
+
     <!-- 左側：ジャンル検索サイドバー -->
     <div class="col-md-3">
       <table class="table table-bordered">
@@ -24,7 +24,7 @@
 
     <!-- 右側：メインコンテンツ -->
     <div class="col-md-9">
-      
+
       <!-- メインビジュアル（画像部分） -->
       <div class="card mb-5">
         <!-- 画像があればここに image_tag を入れますが、今はワイヤーフレーム風の枠を表示します -->
@@ -46,10 +46,10 @@
         <% @new_items.each do |item| %>
           <div class="col-md-3">
             <div class="card h-100 border-0">
-        
+
               <!-- ★修正ポイント：ここから link_to で囲む -->
               <%= link_to item_path(item.id), class: "text-dark", style: "text-decoration: none;" do %>
-        
+
                 <!-- 商品画像エリア -->
                 <div class="bg-light text-center d-flex align-items-center justify-content-center" style="height: 150px; border: 1px solid #ddd;">
                   <% if item.image.attached? %>
@@ -64,7 +64,7 @@
                   <h6 class="card-title font-weight-bold"><%= item.name %></h6>
                   <p class="card-text">¥<%= item.with_tax_price.to_fs(:delimited) %></p>
                 </div>
-          
+
               <% end %>
              <!-- ★修正ポイント：ここまで -->
 
@@ -72,7 +72,7 @@
           </div>
         <% end %>
       </div>
-      
+
 
       <!-- すべての商品を見るリンク -->
       <div class="text-right mt-3 mb-5">
