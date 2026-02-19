@@ -1,4 +1,9 @@
 class Public::HomesController < ApplicationController
+<<<<<<< HEAD
+  def top; end
+  def about; end
+end
+=======
   def top
     # ジャンルを取得（サイドバー用）
     @genres = Genre.all
@@ -9,4 +14,9 @@ class Public::HomesController < ApplicationController
 
   def about
   end
+<<<<<<< HEAD
 end
+>>>>>>> develop
+=======
+end
+>>>>>>> develop

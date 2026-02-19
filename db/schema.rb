@@ -48,6 +48,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_19_035308) do
     t.datetime "updated_at", null: false
   end
 
+ActiveRecord::Schema[8.0].define(version: 2026_02_17_064416) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
