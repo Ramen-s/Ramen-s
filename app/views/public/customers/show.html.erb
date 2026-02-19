@@ -12,10 +12,10 @@
   <!-- 登録情報 表 -->
   <table class="table table-bordered customer-show-table">
     <tbody>
-      <tr>
-        <th class="bg-light" style="width: 180px;">氏名</th>
-        <td><%= @customer.name %></td>
-      </tr>
+<tr>
+  <th class="bg-light" style="width: 180px;">氏名</th>
+  <td><%= @customer.last_name %> <%= @customer.first_name %></td>
+</tr>
       <tr>
         <th class="bg-light">カナ</th>
         <td><%#= @customer.kana %></td>
