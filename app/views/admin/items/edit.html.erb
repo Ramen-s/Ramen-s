@@ -1,5 +1,13 @@
-<h1>商品編集</h1>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <h2 class="mb-4 bg-light text-center py-2">商品編集</h2>
 
-<%= render "form", item: @item %>
+      <%= render "form", item: @item %>
 
-<p><%= link_to "詳細へ戻る", admin_item_path(@item) %></p>
+      <div class="text-center mt-3">
+        <%= link_to "詳細へ戻る", admin_item_path(@item), class: "text-primary text-decoration-underline" %>
+      </div>
+    </div>
+  </div>
+</div>
