@@ -8,7 +8,12 @@
       <nav class="nc-nav">
         <%= link_to "商品一覧", items_path, class: "nc-btn" %>
         <%= link_to "マイページ", customers_my_page_path, class: "nc-btn" %>
-        <%= link_to "ログアウト", destroy_customer_session_path, data: { turbo_method: :delete }, class: "nc-btn" %>
+
+        <%= button_to "ログアウト",
+              destroy_customer_session_path,
+              method: :delete,
+              form: { style: "display:inline;" },
+              class: "nc-btn" %>
       </nav>
 
       <form class="nc-search" action="#" method="get">

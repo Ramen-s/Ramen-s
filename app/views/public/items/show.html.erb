@@ -12,12 +12,18 @@
     </div>
   </aside>
 
-  <!-- 右：商品詳細（※「商品詳細」という見出しはそもそも入れない） -->
+  <!-- 右：商品詳細 -->
   <main class="item-show__main">
     <div class="item-detail">
-      <!-- 画像未実装：枠だけ -->
+      <!-- 画像 -->
       <div class="item-detail__image">
-        <div class="item-detail__image-dummy"></div>
+        <% if @item.image.attached? %>
+          <%= image_tag @item.image, style: "width:100%; height:100%; object-fit:cover; display:block;" %>
+        <% else %>
+          <div class="item-detail__image-dummy" style="display:flex; align-items:center; justify-content:center; color:#777;">
+            No Image
+          </div>
+        <% end %>
       </div>
 
       <div class="item-detail__info">
@@ -29,19 +35,23 @@
           ¥ <%= @item.price %> <span class="item-detail__tax">(税込)</span>
         </p>
 
-        <div class="item-detail__actions">
-          <div class="qty-select">
-            <span class="qty-select__label">個数選択</span>
-            <select class="qty-select__select" name="quantity">
-              <option value="" selected hidden></option>
-              <% (1..10).each do |n| %>
-                <option value="<%= n %>"><%= n %></option>
-              <% end %>
-            </select>
-          </div>
+        <!-- カート追加フォーム -->
+        <%= form_with url: cart_items_path, scope: :cart_item, method: :post, local: true do |f| %>
+          <%= f.hidden_field :item_id, value: @item.id %>
 
-          <button type="button" class="item-detail__cart-btn">カートに入れる</button>
-        </div>
+          <div class="item-detail__actions">
+            <div class="qty-select">
+              <span class="qty-select__label">個数選択</span>
+              <%= f.select :amount,
+                    options_for_select((1..10).map { |n| [n, n] }),
+                    { include_blank: true },
+                    class: "qty-select__select" %>
+            </div>
+
+            <%= f.submit "カートに入れる", class: "item-detail__cart-btn" %>
+          </div>
+        <% end %>
+
       </div>
     </div>
   </main>

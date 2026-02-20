@@ -437,3 +437,428 @@ td {
   margin-left: 12px;
   min-width: 120px;
 }
+
+/* =========================================================
+   Admin: Item Show (header以外)
+========================================================= */
+
+.admin-page {
+  padding: 48px 0 80px;
+}
+
+.admin-page__inner {
+  max-width: 900px;      /* 参考の「中央寄りだけど左に寄って見える」幅感 */
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* 「商品詳細」小さめのグレー帯（左寄せ） */
+.admin-page__title {
+  display: inline-block;
+  margin: 0 0 28px;
+  padding: 10px 18px;
+  background: #f2f2f2;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* 本体：左(画像) + 右(情報) */
+.admin-item-show {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+/* 画像/No Image の枠（固定＋縮小耐性） */
+.admin-item-show__media {
+  flex: 0 0 280px;       /* 参考の「左の箱」サイズ感に寄せる */
+}
+
+.admin-item-show__img,
+.admin-item-show__noimg {
+  width: 100%;
+  aspect-ratio: 3 / 2;   /* 画像もNo Imageも同じ比率 */
+  max-width: 280px;
+  border-radius: 2px;
+}
+
+.admin-item-show__img {
+  display: block;
+  object-fit: cover;
+}
+
+.admin-item-show__noimg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #6c757d;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* 右側：テーブル */
+.admin-item-show__body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.admin-item-show__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-item-show__table th {
+  width: 170px;
+  padding: 10px 12px 10px 0;
+  vertical-align: top;
+  font-weight: 700;
+  white-space: nowrap;
+  border: none;
+}
+
+.admin-item-show__table td {
+  padding: 10px 0;
+  vertical-align: top;
+  border: none;
+}
+
+.admin-item-show__desc {
+  line-height: 1.6;
+}
+
+.admin-item-show__status.is-active {
+  color: #198754; /* bootstrap success */
+  font-weight: 700;
+}
+
+.admin-item-show__status.is-inactive {
+  color: #6c757d; /* bootstrap secondary */
+  font-weight: 700;
+}
+
+/* 編集ボタン（参考の位置感：少し下に、左寄り気味） */
+.admin-item-show__actions {
+  margin-top: 28px;
+}
+
+.admin-item-show__editbtn {
+  min-width: 180px;
+  padding: 12px 28px;
+  border-radius: 8px;
+}
+
+/* 画面が狭いときは縦並びにして重なり回避 */
+@media (max-width: 768px) {
+  .admin-item-show {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .admin-item-show__media {
+    flex-basis: auto;
+  }
+  .admin-item-show__table th {
+    width: 140px;
+  }
+}
+
+
+/* =========================================================
+   Admin: Item Edit/New Form (header以外)
+========================================================= */
+
+.admin-item-form {
+  margin-top: 10px;
+}
+
+/* 1行 = ラベル列 + 入力列 */
+.admin-item-form__row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
+  align-items: start;
+  margin: 14px 0;
+}
+
+.admin-item-form__label {
+  font-weight: 700;
+  padding-top: 6px;
+  white-space: nowrap;
+}
+
+.admin-item-form__field {
+  min-width: 0;
+}
+
+.admin-item-form__input,
+.admin-item-form__textarea,
+.admin-item-form__select {
+  width: 520px;           /* 参考の“短め”幅に寄せる */
+  max-width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #cfcfcf;
+  border-radius: 4px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.admin-item-form__textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.admin-item-form__select {
+  height: 36px;
+}
+
+/* 税抜価格（入力 + 円） */
+.admin-item-form__price {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-item-form__input--price {
+  width: 180px;          /* 参考の“短い価格欄” */
+}
+
+.admin-item-form__yen {
+  font-weight: 700;
+}
+
+/* ラジオ */
+.admin-item-form__radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 18px;
+}
+
+.admin-item-form__radio-text.is-active {
+  color: #198754;
+  font-weight: 700;
+}
+
+.admin-item-form__radio-text.is-inactive {
+  color: #6c757d;
+  font-weight: 700;
+}
+
+/* ボタン：下中央 */
+.admin-item-form__actions {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.admin-item-form__submit {
+  min-width: 200px;
+  padding: 12px 28px;
+  border-radius: 8px;
+}
+
+/* 画面が狭いときは縦に積む（重なり防止） */
+@media (max-width: 768px) {
+  .admin-item-form__row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .admin-item-form__label {
+    padding-top: 0;
+  }
+  .admin-item-form__input--price {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   Admin: Genres (header以外)
+========================================================= */
+
+.admin-genre {
+  margin-top: 6px;
+}
+
+/* フォーム（左：ラベル / 右：入力+ボタン） */
+.admin-genre__form {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 18px;
+  align-items: center;
+  margin: 18px 0 28px;
+}
+
+.admin-genre__form-label {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.admin-genre__form-body {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.admin-genre__input {
+  width: 200px;
+  max-width: 100%;
+  padding: 6px 10px;
+  border: 1px solid #666;
+  border-radius: 2px;
+  background: #fff;
+}
+
+.admin-genre__submit {
+  min-width: 130px;
+  padding: 10px 18px;
+  border-radius: 10px;
+}
+
+/* 一覧（見出し帯＋行の薄い区切り） */
+.admin-genre__list {
+  width: 320px;
+  max-width: 100%;
+}
+
+.admin-genre__list-head {
+  background: #f2f2f2;
+  padding: 10px 12px;
+  font-weight: 700;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.admin-genre__row {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.admin-genre__editbtn {
+  width: 100px;
+  padding: 8px 0;
+  border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+  .admin-genre__form {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .admin-genre__form-body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .admin-genre__row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .admin-genre__editbtn {
+    width: 120px;
+  }
+}
+
+
+/* =========================================================
+   Admin: Home (header以外)
+========================================================= */
+
+.admin-home {
+  margin-top: 20px;
+}
+
+.admin-home__msg {
+  margin: 0;
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   Admin: Genres (header以外)
+========================================================= */
+
+.admin-genre {
+  margin-top: 6px;
+}
+
+/* フォーム（左：ラベル / 右：入力+ボタン） */
+.admin-genre__form {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 18px;
+  align-items: center;
+  margin: 18px 0 28px;
+}
+
+.admin-genre__form-label {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.admin-genre__form-body {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.admin-genre__input {
+  width: 200px;
+  max-width: 100%;
+  padding: 6px 10px;
+  border: 1px solid #666;
+  border-radius: 2px;
+  background: #fff;
+}
+
+.admin-genre__submit {
+  min-width: 130px;
+  padding: 10px 18px;
+  border-radius: 10px;
+}
+
+/* 一覧（見出し帯＋行の薄い区切り） */
+.admin-genre__list {
+  width: 320px;
+  max-width: 100%;
+}
+
+.admin-genre__list-head {
+  background: #f2f2f2;
+  padding: 10px 12px;
+  font-weight: 700;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.admin-genre__row {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.admin-genre__editbtn {
+  width: 100px;
+  padding: 8px 0;
+  border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+  .admin-genre__form {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .admin-genre__form-body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .admin-genre__row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .admin-genre__editbtn {
+    width: 120px;
+  }
+}
+

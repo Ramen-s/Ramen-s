@@ -1,5 +1,7 @@
 class Admin::GenresController < ApplicationController
-  before_action :authenticate_admin!
+  # 一時的に管理者ログインを無効化したい場合はコメントアウトのままにする
+  # before_action :authenticate_admin!
+
   before_action :set_genre, only: [:edit, :update]
 
   def index
