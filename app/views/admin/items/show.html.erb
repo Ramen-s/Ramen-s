@@ -1,94 +1,55 @@
-<div class="container my-5">
-  <h2 class="bg-light d-inline-block px-3 py-2 mb-4">注文履歴詳細</h2>
+<div class="admin-page">
+  <div class="admin-page__inner">
+    <h2 class="admin-page__title">商品詳細</h2>
 
-  <div class="row mb-4">
-    <div class="col-md-9">
-      <table class="table table-borderless">
-        <tr>
-          <th style="width: 20%">購入者</th>
-          <td>
-            <%# 安全な表示と詳細へのリンク %>
-            <%= link_to "#{@order.customer.last_name} #{@order.customer.first_name}", admin_customer_path(@order.customer), class: "text-primary text-decoration-underline" %>
-          </td>
-        </tr>
-        <tr>
-          <th>注文日</th>
-          <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
-        </tr>
-        <tr>
-          <th>配送先</th>
-          <td>
-            〒<%= @order.postal_code %> <%= @order.address %><br>
-            <%= @order.name %>
-          </td>
-        </tr>
-        <tr>
-          <th>支払方法</th>
-          <td><%= @order.payment_method_i18n %></td> <%# %>
-        </tr>
-        <tr>
-          <th>注文ステータス</th>
-          <td>
-            <%= form_with model: @order, url: admin_order_path(@order), method: :patch, class: "d-flex" do |f| %>
-              <%= f.select :status, Order.statuses_i18n.invert, {}, {class: "custom-select w-50 mr-3"} %>
-              <%= f.submit "更新", class: "btn btn-success" %>
-            <% end %>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
+    <div class="admin-item-show">
+      <!-- 左：画像 -->
+      <div class="admin-item-show__media">
+        <% if @item.image.attached? %>
+          <%= image_tag @item.image, class: "admin-item-show__img" %>
+        <% else %>
+          <div class="admin-item-show__noimg">No Image</div>
+        <% end %>
+      </div>
 
-  <div class="row">
-    <div class="col-md-8">
-      <table class="table border-bottom">
-        <thead class="table-light">
+      <!-- 右：情報 -->
+      <div class="admin-item-show__body">
+        <table class="admin-item-show__table">
           <tr>
-            <th style="width: 35%">商品名</th>
-            <th>単価(税込)</th>
-            <th>数量</th>
-            <th>小計</th>
-            <th style="width: 30%">製作ステータス</th>
-            <th></th>
+            <th>商品名</th>
+            <td><%= @item.name %></td>
           </tr>
-        </thead>
-        <tbody>
-          <% @order_details.each do |detail| %>
-            <tr>
-              <td class="align-middle"><%= detail.item.name %></td>
-              <td class="align-middle"><%= (detail.price * 1.1).floor.to_fs(:delimited) %></td>
-              <td class="align-middle"><%= detail.amount %></td>
-              <td class="align-middle"><%= (detail.price * 1.1 * detail.amount).floor.to_fs(:delimited) %></td>
-              <td class="align-middle">
-                <%= form_with model: detail, url: admin_order_detail_path(detail), method: :patch, class: "d-flex" do |f| %>
-                  <%= f.select :making_status, OrderDetail.making_statuses_i18n.invert, {}, {class: "custom-select"} %>
-              </td>
-              <td class="align-middle">
-                  <%= f.submit "更新", class: "btn btn-success ml-2" %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+          <tr>
+            <th>商品説明</th>
+            <td class="admin-item-show__desc"><%= @item.introduction %></td>
+          </tr>
+          <tr>
+            <th>ジャンル</th>
+            <td><%= @item.genre&.name %></td>
+          </tr>
+          <tr>
+            <th>税込価格<br>(税抜価格)</th>
+            <td>
+              <strong><%= (@item.price * 1.1).floor.to_fs(:delimited) %></strong> 円
+              (<%= @item.price.to_fs(:delimited) %> 円)
+            </td>
+          </tr>
+          <tr>
+            <th>販売ステータス</th>
+            <td>
+              <% if @item.is_active %>
+                <span class="admin-item-show__status is-active">販売中</span>
+              <% else %>
+                <span class="admin-item-show__status is-inactive">販売停止中</span>
+              <% end %>
+            </td>
+          </tr>
+        </table>
 
-    <%# 右側の合計金額エリア %>
-    <div class="col-md-4 d-flex align-items-end">
-      <table class="table table-borderless">
-        <tr>
-          <th class="font-weight-bold">商品合計</th>
-          <td class="text-right"><%= (@order.total_payment - 800).to_fs(:delimited) %>円</td>
-        </tr>
-        <tr>
-          <th class="font-weight-bold">送料</th>
-          <td class="text-right">800円</td>
-        </tr>
-        <tr>
-          <th class="font-weight-bold">請求金額合計</th>
-          <td class="text-right font-weight-bold"><%= @order.total_payment.to_fs(:delimited) %>円</td>
-        </tr>
-      </table>
+        <div class="admin-item-show__actions">
+          <%= link_to "編集する", edit_admin_item_path(@item), class: "btn btn-success admin-item-show__editbtn" %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

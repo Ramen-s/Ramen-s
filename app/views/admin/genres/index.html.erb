@@ -1,0 +1,31 @@
+<div class="admin-page">
+  <div class="admin-page__inner">
+    <h2 class="admin-page__title">ジャンル一覧・追加</h2>
+
+    <!-- 追加フォーム（左寄せ・横並び） -->
+    <div class="admin-genre">
+      <div class="admin-genre__form">
+        <div class="admin-genre__form-label">ジャンル名</div>
+
+        <%= form_with model: [:admin, @genre], local: true, class: "admin-genre__form-body" do |f| %>
+          <%= f.text_field :name, class: "admin-genre__input", placeholder: "ジャンル名" %>
+          <%= f.submit "新規登録", class: "btn btn-success admin-genre__submit" %>
+        <% end %>
+      </div>
+
+      <!-- 一覧（ID列なし） -->
+      <div class="admin-genre__list">
+        <div class="admin-genre__list-head">ジャンル</div>
+
+        <% @genres.each do |genre| %>
+          <div class="admin-genre__row">
+            <div class="admin-genre__name"><%= genre.name %></div>
+            <div class="admin-genre__action">
+              <%= link_to "編集する", edit_admin_genre_path(genre), class: "btn btn-success admin-genre__editbtn" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,9 +10,9 @@
           ジャンル検索
         </div>
         <div style="padding:10px 12px;">
-          <ul style="list-style:none; padding-left:0; margin:0;">
+          <ul class="genre-box__list">
             <% @genres.each do |genre| %>
-              <li style="margin:6px 0;">
+              <li>
                 <%= link_to genre.name, items_path(genre_id: genre.id) %>
               </li>
             <% end %>
@@ -30,17 +30,56 @@
       <div style="display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:18px;">
         <% @items.each do |item| %>
           <div>
-            <!-- 画像未実装：枠だけ -->
-            <div style="border:1px solid #ddd; background:#f3f3f3; height:120px;"></div>
+            <!-- 画像 -->
+            <div style="border:1px solid #ddd; background:#f3f3f3; height:120px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+              <% if item.image.attached? %>
+                <%= image_tag item.image, style: "width:100%; height:100%; object-fit:cover; display:block;" %>
+              <% else %>
+                <div style="color:#777; font-size:12px;">No Image</div>
+              <% end %>
+            </div>
 
             <div style="margin-top:8px;">
-              <%= link_to item.name, item_path(item) %>
+              <%= link_to item.name, item_path(item), style: "color:#000; text-decoration:none;" %>
             </div>
 
             <div style="margin-top:4px; font-weight:600;">
               ¥<%= item.price %>
             </div>
           </div>
+        <% end %>
+      </div>
+
+      <!-- ページネーション（自前：1ページ8件） -->
+      <div style="margin-top:22px; text-align:center;">
+        <% qp = {} %>
+        <% qp[:genre_id] = @selected_genre.id if @selected_genre.present? %>
+
+        <% if @total_pages > 1 %>
+          <%# First / Prev %>
+          <% if @page > 1 %>
+            <%= link_to "First", items_path(qp.merge(page: 1)), style: "margin:0 6px;" %>
+            <%= link_to "Prev",  items_path(qp.merge(page: @page - 1)), style: "margin:0 6px;" %>
+          <% end %>
+
+          <%# number links（最大5個だけ表示：現在の周辺） %>
+          <% start_page = [@page - 2, 1].max %>
+          <% end_page   = [start_page + 4, @total_pages].min %>
+          <% start_page = [end_page - 4, 1].max %>
+
+          <% (start_page..end_page).each do |p| %>
+            <% if p == @page %>
+              <span style="margin:0 6px; font-weight:700;"><%= p %></span>
+            <% else %>
+              <%= link_to p, items_path(qp.merge(page: p)), style: "margin:0 6px;" %>
+            <% end %>
+          <% end %>
+
+          <%# Next / Last %>
+          <% if @page < @total_pages %>
+            <%= link_to "Next", items_path(qp.merge(page: @page + 1)), style: "margin:0 6px;" %>
+            <%= link_to "Last", items_path(qp.merge(page: @total_pages)), style: "margin:0 6px;" %>
+          <% end %>
         <% end %>
       </div>
     </main>

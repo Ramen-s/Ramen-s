@@ -1,0 +1,5 @@
+      <%# Next / Last %>
+      <% if page < total_pages %>
+        <%= link_to '>',  admin_items_path(page: page + 1), style: 'margin:0 6px;' %>
+        <%= link_to '>>', admin_items_path(page: total_pages), style: 'margin:0 6px;' %>
+      <% end %>

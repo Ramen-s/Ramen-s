@@ -72,5 +72,7 @@ gem 'jquery-rails'
 gem 'dartsass-sprockets'
 gem 'sprockets-rails'
 gem 'mini_racer'
+gem "kaminari"
+gem "pagy"
 gem 'enum_help'
-gem 'kaminari'
+

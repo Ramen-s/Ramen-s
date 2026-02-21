@@ -1,23 +1,19 @@
 class Admin::ItemsController < ApplicationController
-  # before_action :authenticate_admin!
+  # 一時的に管理者ログインを無効化したい場合はコメントアウトのままにする
+  before_action :authenticate_admin!
 
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item,   only: [:show, :edit, :update]
+  before_action :set_genres, only: [:new, :create, :edit, :update]
 
   def index
-    @items = Item.all
+    @items = Item.order(:id).page(params[:page]).per(10)
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def new
     @item = Item.new
-    if @item.save
-      redirect_to admin_item_path(@item)
-    else
-      render :new
-    end
   end
 
   def create
@@ -44,6 +40,10 @@ class Admin::ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def set_genres
+    @genres = Genre.all
   end
 
   def item_params

@@ -1,5 +1,9 @@
-<h1>商品編集</h1>
+<div class="admin-page">
+  <div class="admin-page__inner">
+    <h2 class="admin-page__title">商品編集</h2>
 
-<%= render "form", item: @item %>
-
-<p><%= link_to "詳細へ戻る", admin_item_path(@item) %></p>
+    <div class="admin-item-form">
+      <%= render "form", item: @item %>
+    </div>
+  </div>
+</div>
