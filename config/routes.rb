@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     get   "customers/information/edit" => "customers#edit"
     patch "customers/information"      => "customers#update"
     get   "customers/unsubscribe"      => "customers#unsubscribe"
-    patch "customers/withdraw"         => "customers#withdraw"
+    patch "customers/withdraw"         => "root_path"
 
     # cart_items
     resources :cart_items, only: [:index, :create, :update, :destroy] do
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get "homes/top"
     root "homes#top"
-    
+
     get 'new/items' => 'items#new', as: 'new_item'
     resources :items, only: [:index,  :create, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]

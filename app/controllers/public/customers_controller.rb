@@ -39,8 +39,29 @@ class Public::CustomersController < ApplicationController
     end
   end
 
-  def unsubscribe; end
-  def withdraw; end
+  def unsubscribe
+    # 退会確認画面表示
+  end
+
+  def withdraw_confirm
+    #ログイン未実装
+    #@customer = Customer.first
+    #本番環境では下記
+    @customer = current_customer
+  end
+
+  def withdraw
+    @customer = Customer.first
+    #本番環境では下記
+    # @customer = current_customer
+    # customer.update!(is_active: false)   # ←論理削除
+    # sign_out customer                    # ←ログアウトもここで
+    # redirect_to root_path, notice: "退会しました。"
+    # return
+
+    #ルート確認用（本番環境では不要）
+    redirect_to root_path, notice: "退会処理が完了しました。"
+  end
 
   private
 
