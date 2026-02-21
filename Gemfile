@@ -74,6 +74,5 @@ gem 'sprockets-rails'
 gem 'mini_racer'
 # pagination（1ページあたりの表示数を制御）
 gem "kaminari"
-
 # pagination（Rails 8対応の軽量ページネーション）
 gem "pagy"
