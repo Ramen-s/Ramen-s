@@ -886,68 +886,45 @@ td {
 }
 
 /* =========================================================
-   Admin Items Pagination（kaminariのHTML差を吸収）
+   Kaminari Pagination (Bootstrap完全上書き版)
 ========================================================= */
 
-.admin-items-pagination{
-  margin-top: 22px;
-  display: flex;
-  justify-content: center; /* ← 左に行くのを強制的に止める */
+ul.pagination {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin-top: 28px !important;
+  padding-left: 0 !important;
 }
 
-/* nav版（kaminari標準）も ul版（bootstrap系）も両対応 */
-.admin-items-pagination nav.pagination,
-.admin-items-pagination ul.pagination{
-  display: inline-flex;
-  gap: 10px;
-  margin: 0;
-  padding: 0;
+ul.pagination li {
+  list-style: none !important;
 }
 
-/* 余計な list-style 対策（ul/liが来た場合） */
-.admin-items-pagination ul.pagination{
-  list-style: none;
-}
-.admin-items-pagination ul.pagination li{
-  list-style: none;
-}
-
-/* ボタン化：a と span 両方に当てる */
-.admin-items-pagination .pagination a,
-.admin-items-pagination .pagination span{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 44px;
-  height: 34px;
-  padding: 0 12px;
-
-  border: 1px solid #cfcfcf;
-  border-radius: 6px;
-  background: #fff;
-
-  color: #333;
-  text-decoration: none;
-  font-size: 14px;
-  line-height: 1;
+ul.pagination li a,
+ul.pagination li span {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  padding: 0 12px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+  text-decoration: none !important;
+  color: #333 !important;
 }
 
-/* 現在ページ（kaminariは current を span に付けることが多い） */
-.admin-items-pagination .pagination .current{
-  background: #f1f1f1;
-  border-color: #bbb;
-  font-weight: 700;
+ul.pagination li.active span,
+ul.pagination li span.current {
+  background: #e5e5e5 !important;
+  font-weight: 700 !important;
+  border-color: #bbb !important;
 }
 
-/* hover */
-.admin-items-pagination .pagination a:hover{
-  background: #f5f5f5;
-  border-color: #aaa;
-}
-
-/* disabled（first/prev/next/last が無効のとき） */
-.admin-items-pagination .pagination .disabled{
-  opacity: 0.55;
+ul.pagination li a:hover {
+  background: #f3f3f3 !important;
 }
 
 /* =========================================================
@@ -985,21 +962,4 @@ td {
 .admin-items-pagination .pagination .page-item.active .page-link{
   border: none !important;
   background: transparent !important;
-
-/* =========================================
-   会員登録情報画面レイアウト
-========================================= */
-.customer-edit-actions {
-  display: flex;
-  gap: 30px;
-}
-
-/* =========================================
-   退会確認画面レイアウト
-========================================= */
-
-.withdraw-container {
-  text-align: center;
-  margin-top: 80px;
-
 }

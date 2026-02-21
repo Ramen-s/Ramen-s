@@ -1,0 +1,16 @@
+<div class="admin-page">
+  <div class="admin-page__inner">
+    <h2 class="admin-page__title">ジャンル編集</h2>
+
+    <div class="admin-genre-edit">
+      <div class="admin-genre__form">
+        <div class="admin-genre__form-label">ジャンル名</div>
+
+        <%= form_with model: [:admin, @genre], local: true, class: "admin-genre__form-body" do |f| %>
+          <%= f.text_field :name, class: "admin-genre__input" %>
+          <%= f.submit "変更を保存", class: "btn btn-success admin-genre__submit" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

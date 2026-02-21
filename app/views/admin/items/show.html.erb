@@ -1,0 +1,55 @@
+<div class="admin-page">
+  <div class="admin-page__inner">
+    <h2 class="admin-page__title">商品詳細</h2>
+
+    <div class="admin-item-show">
+      <!-- 左：画像 -->
+      <div class="admin-item-show__media">
+        <% if @item.image.attached? %>
+          <%= image_tag @item.image, class: "admin-item-show__img" %>
+        <% else %>
+          <div class="admin-item-show__noimg">No Image</div>
+        <% end %>
+      </div>
+
+      <!-- 右：情報 -->
+      <div class="admin-item-show__body">
+        <table class="admin-item-show__table">
+          <tr>
+            <th>商品名</th>
+            <td><%= @item.name %></td>
+          </tr>
+          <tr>
+            <th>商品説明</th>
+            <td class="admin-item-show__desc"><%= @item.introduction %></td>
+          </tr>
+          <tr>
+            <th>ジャンル</th>
+            <td><%= @item.genre&.name %></td>
+          </tr>
+          <tr>
+            <th>税込価格<br>(税抜価格)</th>
+            <td>
+              <strong><%= (@item.price * 1.1).floor.to_fs(:delimited) %></strong> 円
+              (<%= @item.price.to_fs(:delimited) %> 円)
+            </td>
+          </tr>
+          <tr>
+            <th>販売ステータス</th>
+            <td>
+              <% if @item.is_active %>
+                <span class="admin-item-show__status is-active">販売中</span>
+              <% else %>
+                <span class="admin-item-show__status is-inactive">販売停止中</span>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+
+        <div class="admin-item-show__actions">
+          <%= link_to "編集する", edit_admin_item_path(@item), class: "btn btn-success admin-item-show__editbtn" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
