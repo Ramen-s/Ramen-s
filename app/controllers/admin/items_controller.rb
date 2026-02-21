@@ -4,14 +4,20 @@ class Admin::ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update]
 
   def index
-    @items = Item.includes(:genre).order(created_at: :desc)
+    @items = Item.all
   end
 
   def show
+    @item = Item.find(params[:id])
   end
 
   def new
     @item = Item.new
+    if @item.save
+      redirect_to admin_item_path(@item)
+    else
+      render :new
+    end
   end
 
   def create
@@ -41,6 +47,6 @@ class Admin::ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:genre_id, :name, :introduction, :price, :is_active)
+    params.require(:item).permit(:image, :name, :introduction, :genre_id, :price, :is_active)
   end
 end

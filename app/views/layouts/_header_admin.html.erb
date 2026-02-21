@@ -1,24 +1,26 @@
-<header class="site-header">
-  <div class="header-inner">
-    <div class="header-logo">
-      <%= link_to "LOGO", (defined?(admin_root_path) ? admin_root_path : "/admin"), class: "logo" %>
-    </div>
+<header class="nc-header">
+  <div class="nc-header__inner">
+    <%= link_to "LOGO", admin_root_path, class: "nc-logo" %>
 
-    <nav class="header-nav">
-      <%= link_to "商品一覧", (defined?(admin_items_path) ? admin_items_path : "/admin/items"), class: "nav-btn" %>
-      <%= link_to "会員一覧", (defined?(admin_customers_path) ? admin_customers_path : "#"), class: "nav-btn" %>
-      <%= link_to "注文履歴一覧", (defined?(admin_orders_path) ? admin_orders_path : "#"), class: "nav-btn" %>
-      <%= link_to "ジャンル一覧", (defined?(admin_genres_path) ? admin_genres_path : "#"), class: "nav-btn" %>
+    <div class="nc-header__right">
+      <nav class="nc-nav">
+        <%= link_to "商品一覧", admin_items_path, class: "nc-btn" %>
+        <%= link_to "会員一覧", admin_customers_path, class: "nc-btn" %>
+        <%#= link_to "注文履歴一覧", admin_orders_path, class: "nc-btn" %>
+        <%= link_to "ジャンル一覧", admin_genres_path, class: "nc-btn" %>
 
-      <% if defined?(destroy_admin_session_path) %>
-        <%= link_to "ログアウト", destroy_admin_session_path, data: { turbo_method: :delete }, class: "nav-btn" %>
-      <% else %>
-        <%= link_to "ログアウト", "#", class: "nav-btn" %>
-      <% end %>
-    </nav>
+        <%= link_to "ログアウト",
+                    destroy_admin_session_path,
+                    data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" },
+                    class: "nc-btn" %>
+      </nav>
 
-    <div class="header-search">
-      <input type="text" placeholder="Search" />
+      <div class="nc-search">
+        <input class="nc-search__input" type="text" placeholder="Search" />
+        <button class="nc-search__icon" type="button" aria-label="search">
+          🔍
+        </button>
+      </div>
     </div>
   </div>
 </header>
