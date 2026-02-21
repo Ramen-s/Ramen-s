@@ -1,12 +1,12 @@
 class Admin::ItemsController < ApplicationController
   # 一時的に管理者ログインを無効化したい場合はコメントアウトのままにする
-  # before_action :authenticate_admin!
+  before_action :authenticate_admin!
 
   before_action :set_item,   only: [:show, :edit, :update]
   before_action :set_genres, only: [:new, :create, :edit, :update]
 
   def index
-    @items = Item.all
+    @items = Item.order(:id).page(params[:page]).per(10)
   end
 
   def show

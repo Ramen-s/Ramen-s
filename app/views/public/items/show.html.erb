@@ -4,7 +4,6 @@
     <div class="genre-box">
       <h2 class="genre-box__title">ジャンル検索</h2>
       <ul class="genre-box__list">
-        <li><%= link_to "全て", items_path %></li>
         <% @genres.each do |genre| %>
           <li><%= link_to genre.name, items_path(genre_id: genre.id) %></li>
         <% end %>

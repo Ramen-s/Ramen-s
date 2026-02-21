@@ -1,6 +1,5 @@
 <div style="max-width:900px; margin:0 auto; padding:24px 16px;">
-
-  <div  style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
     <h1 style="margin:0; font-size:28px;">商品一覧</h1>
 
     <!-- ＋（新規登録） -->
@@ -28,7 +27,7 @@
           <td style="padding:10px 8px;"><%= item.id %></td>
 
           <td style="padding:10px 8px;">
-            <%= link_to item.name, admin_item_path(item) %>
+            <%= link_to item.name, admin_item_path(item), class: "admin-item-name-link" %>
           </td>
 
           <td style="padding:10px 8px;">¥<%= item.price %></td>
@@ -47,5 +46,36 @@
     </tbody>
   </table>
 
-  <%# ページネーションは後で導入するならここに置く（kaminari等） %>
+  <!-- ページネーション（/items と同じ：1 2 Next Last） -->
+  <div style="margin-top:22px; text-align:center;">
+    <% page = @items.current_page %>
+    <% total_pages = @items.total_pages %>
+
+    <% if total_pages > 1 %>
+      <%# First / Prev %>
+      <% if page > 1 %>
+        <%= link_to "First", admin_items_path(page: 1), style: "margin:0 6px;" %>
+        <%= link_to "Prev",  admin_items_path(page: page - 1), style: "margin:0 6px;" %>
+      <% end %>
+
+      <%# number links（最大5個だけ表示：現在の周辺） %>
+      <% start_page = [page - 2, 1].max %>
+      <% end_page   = [start_page + 4, total_pages].min %>
+      <% start_page = [end_page - 4, 1].max %>
+
+      <% (start_page..end_page).each do |p| %>
+        <% if p == page %>
+          <span style="margin:0 6px; font-weight:700;"><%= p %></span>
+        <% else %>
+          <%= link_to p, admin_items_path(page: p), style: "margin:0 6px;" %>
+        <% end %>
+      <% end %>
+
+      <%# Next / Last %>
+      <% if page < total_pages %>
+        <%= link_to 'Next>',  admin_items_path(page: page + 1), style: 'margin:0 6px;' %>
+        <%= link_to 'Last>>', admin_items_path(page: total_pages), style: 'margin:0 6px;' %>
+      <% end %>
+    <% end %>
+  </div>
 </div>
