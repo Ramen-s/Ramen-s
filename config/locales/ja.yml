@@ -1,0 +1,28 @@
+ja:
+  enums:
+    order:
+      status:
+        waiting_for_payment: "入金待ち"
+        payment_confirmed: "入金確認"
+        making: "製作中"
+        preparing_shipment: "発送準備中"
+        shipped: "発送済み"
+      payment_method:
+        credit_card: "クレジットカード"
+        bank_transfer: "銀行振込"
+
+    order_detail:
+      making_status:
+        waiting: "製作待ち"
+        making: "製作中"
+        done: "製作完了"
+  
+  activerecord:
+    models:
+      order: "注文"
+      order_detail: "注文詳細"
+    attributes:
+      order:
+        status: "注文ステータス"
+        total_payment: "請求額"
+        payment_method: "支払方法"

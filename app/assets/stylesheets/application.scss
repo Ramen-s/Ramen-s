@@ -985,4 +985,21 @@ td {
 .admin-items-pagination .pagination .page-item.active .page-link{
   border: none !important;
   background: transparent !important;
+
+/* =========================================
+   会員登録情報画面レイアウト
+========================================= */
+.customer-edit-actions {
+  display: flex;
+  gap: 30px;
+}
+
+/* =========================================
+   退会確認画面レイアウト
+========================================= */
+
+.withdraw-container {
+  text-align: center;
+  margin-top: 80px;
+
 }
