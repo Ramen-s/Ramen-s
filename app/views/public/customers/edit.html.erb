@@ -54,11 +54,10 @@
         </tbody>
       </table>
 
-      <div class="mt-4 d-flex gap-3">
-        <%= f.submit "編集内容を保存", class: "btn btn-success px-4" %>
-        <%= link_to "戻る", customers_my_page_path, class: "btn btn-secondary px-4" %>
-        <%= link_to "退会する", customers_unsubscribe_path, class: "btn btn-danger px-4" %>
-      </div>
+<div class="mt-4 customer-edit-actions">
+  <%= f.submit "編集内容を保存", class: "btn btn-primary px-4" %>
+  <%= link_to "退会する", customers_unsubscribe_path, class: "btn btn-danger px-4" %>
+</div>
 
     <% end %>
 

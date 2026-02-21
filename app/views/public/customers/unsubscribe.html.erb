@@ -1,14 +1,13 @@
-<p class="fw-bold">本当に退会しますか？</p>
+<div class="withdraw-container">
+  <p class="fw-bold">本当に退会しますか？</p>
 
-<p>
-  退会すると、会員登録情報や<br>
-  これまでの購入履歴が閲覧できなくなります
-</p>
+  <p>
+    退会すると、会員登録情報や<br>
+    これまでの購入履歴が閲覧できなくなります。<br>
+    退会する場合は、「退会する」をクリックしてください。
+  </p>
 
-<div class="customer-show-row mt-4">
-  <%= link_to "退会しない", addresses_path, class: "btn btn-primary btn-sm customer-show-btn" %>
-</div>
+  <%= link_to "退会しない", customers_information_edit_path, class: "btn btn-primary btn-sm customer-show-btn" %>
+  <%= link_to "退会する", root_path, class: "btn btn-danger btn-sm customer-show-btn" %>
 
-<div class="customer-show-row mt-3">
-  <%= link_to "退会する", orders_path, class: "btn btn-danger btn-sm customer-show-btn" %>
 </div>
