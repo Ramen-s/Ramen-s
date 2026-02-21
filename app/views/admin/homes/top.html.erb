@@ -1,9 +1,36 @@
-<div class="admin-page">
-  <div class="admin-page__inner">
-    <h2 class="admin-page__title">管理者トップページ</h2>
+<div class="container my-5">
+  <h2 class="bg-light d-inline-block px-3 py-2 mb-4">注文履歴一覧</h2>
 
-    <div class="admin-home">
-      <p class="admin-home__msg">ログインに成功しました！お疲れ様です！</p>
-    </div>
-  </div>
+  <table class="table table-hover border-bottom">
+    <thead class="table-light">
+      <tr>
+        <th>購入日時</th>
+        <th>購入者</th>
+        <th>注文個数</th>
+        <th>注文ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td>
+            <%# 詳細画面へのリンク %>
+            <%= link_to order.created_at.strftime('%Y/%m/%d %H:%M:%S'), admin_order_path(order), class: "text-primary text-decoration-underline" %>
+          </td>
+          <td><%= "#{order.customer.last_name}  #{order.customer.first_name}" %></td>
+          <td>
+            <%# 注文に含まれる商品の合計個数を計算 %>
+            <%= order.order_details.sum(:amount) %>
+          </td>
+          <td>
+            <%# モデルで設定した enum の日本語訳が表示されます %>
+            <%= order.status_i18n %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <%# ページネーション（kaminari導入済みの場合） %>
+  <%#= paginate @orders %>
 </div>
