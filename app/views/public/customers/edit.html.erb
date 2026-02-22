@@ -18,8 +18,9 @@
 
           <tr>
             <th class="bg-light">カナ</th>
-            <td>
-              <%= f.text_field :kana, class: "form-control", placeholder: "カナを入力" %>
+            <td class="d-flex gap-2">
+              <%= f.text_field :last_name_kana, class: "form-control", placeholder: "セイ" %>
+              <%= f.text_field :first_name_kana, class: "form-control", placeholder: "メイ" %>
             </td>
           </tr>
 
