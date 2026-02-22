@@ -20,16 +20,16 @@ class Public::CustomersController < ApplicationController
 
   def edit
     #ログイン未実装
-    @customer = Customer.first  || Customer.new(name: "testuser", email: "test@example.com")
+    #@customer = Customer.first  || Customer.new(name: "testuser", email: "test@example.com")
     #本番環境では下記
-    #@customer = current_customer
+    @customer = current_customer
   end
 
   def update
     #ログイン未実装
-    @customer = Customer.first
+    #@customer = Customer.first
     #本番環境では下記
-    #@customer = current_customer
+    @customer = current_customer
 
     if @customer.update(customer_params)
       redirect_to customers_my_page_path, notice: "更新しました"
@@ -51,16 +51,17 @@ class Public::CustomersController < ApplicationController
   end
 
   def withdraw
-    @customer = Customer.first
+    #@customer = Customer.first
+    #sign_out customer
     #本番環境では下記
-    # @customer = current_customer
-    # customer.update!(is_active: false)   # ←論理削除
-    # sign_out customer                    # ←ログアウトもここで
-    # redirect_to root_path, notice: "退会しました。"
-    # return
+    @customer = current_customer
+    customer.update!(is_active: false)   # ←論理削除
+    sign_out current_customer                    # ←ログアウトもここで
+    redirect_to root_path, notice: "退会しました。"
+    return
 
     #ルート確認用（本番環境では不要）
-    redirect_to root_path, notice: "退会処理が完了しました。"
+    #redirect_to root_path, notice: "退会処理が完了しました。"
   end
 
   private
