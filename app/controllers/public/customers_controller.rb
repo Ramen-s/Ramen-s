@@ -1,37 +1,14 @@
 class Public::CustomersController < ApplicationController
-
-  # サインアップ（new, create）はログイン前に行うため
-  # allow_unauthenticated_access only: [:new, :create]
-
-  before_action :set_user, only: [:show]
+  before_action :authenticate_customer!
+  before_action :set_customer, only: [:show, :edit, :update, :withdraw]
 
   def show
-    @customer = current_customer || Customer.first || Customer.new(name: "testuser", email: "test@example.com")   # 左（顧客）
-    @customer.last_name_kana
-    @customer.first_name_kana
-    @customer.postal_code
-    @customer.address
-    @customer.telephone_number
-    @customer.email
-
-    #mainでこれに変更！！！！
-    #@customer  = Current.session.user   # 左（顧客）
-
   end
 
   def edit
-    #ログイン未実装
-    #@customer = Customer.first  || Customer.new(name: "testuser", email: "test@example.com")
-    #本番環境では下記
-    @customer = current_customer
   end
 
   def update
-    #ログイン未実装
-    #@customer = Customer.first
-    #本番環境では下記
-    @customer = current_customer
-
     if @customer.update(customer_params)
       redirect_to customers_my_page_path, notice: "更新しました"
     else
@@ -44,28 +21,17 @@ class Public::CustomersController < ApplicationController
     # 退会確認画面表示
   end
 
-  def withdraw_confirm
-    #ログイン未実装
-    #@customer = Customer.first
-    #本番環境では下記
-    @customer = current_customer
-  end
-
   def withdraw
-    #@customer = Customer.first
-    #sign_out customer
-    #本番環境では下記
-    @customer = current_customer
-    customer.update!(is_active: false)   # ←論理削除
-    sign_out current_customer                    # ←ログアウトもここで
+    @customer.update!(is_active: false)  # ← customer じゃなく @customer
+    sign_out current_customer
     redirect_to root_path, notice: "退会しました。"
-    return
-
-    #ルート確認用（本番環境では不要）
-    #redirect_to root_path, notice: "退会処理が完了しました。"
   end
 
   private
+
+  def set_customer
+    @customer = current_customer
+  end
 
   def customer_params
     params.require(:customer).permit(
@@ -73,5 +39,4 @@ class Public::CustomersController < ApplicationController
       :postal_code, :address, :telephone_number, :email
     )
   end
-
 end
