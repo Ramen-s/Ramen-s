@@ -1,34 +1,39 @@
 <%# frozen_string_literal: true %>
 
-<%# public/items の genre_id を維持したいので、必要なキーだけ引き継ぐ %>
+<% current = current_page.number %>
+<% total   = total_pages %>
+
 <% base_params = {} %>
 <% base_params[:genre_id] = params[:genre_id] if params[:genre_id].present? %>
 
-<nav class="nc-pagination" role="navigation" aria-label="pagination">
-  <%= paginator.render do %>
+<nav class="pagination kaminari" aria-label="Pagination">
 
-    <%# 1 2 3 ...（数字） %>
-    <% each_page do |page| %>
-      <% if page.left_outer? || page.right_outer? || page.inside_window? %>
-        <%= page_tag page %>
-      <% elsif !page.was_truncated? %>
-        <%= gap_tag %>
-      <% end %>
+  <%# 1ページ目: 1 2 Next> Last>> %>
+  <% if current == 1 %>
+    <span class="page current">1</span>
+
+    <% if total >= 2 %>
+      <%= link_to "2", url_for(base_params.merge(page: 2)), class: "page" %>
+      <%= link_to "Next>",  url_for(base_params.merge(page: 2)),     class: "next" %>
+      <%= link_to "Last>>", url_for(base_params.merge(page: total)), class: "last" %>
     <% end %>
 
-    <%# Next > %>
-    <% if current_page.last? %>
-      <span class="next disabled">Next &gt;</span>
-    <% else %>
-      <%= link_to "Next >", url_for(base_params.merge(page: current_page.number + 1)), class: "next" %>
+  <%# 最後のページ: <Prev <<First %>
+  <% elsif current == total %>
+    <% if total >= 2 %>
+      <%= link_to "<Prev",   url_for(base_params.merge(page: current - 1)), class: "prev" %>
+      <%= link_to "<<First", url_for(base_params.merge(page: 1)),           class: "first" %>
     <% end %>
 
-    <%# Last » %>
-    <% if current_page.last? %>
-      <span class="last disabled">Last &raquo;</span>
-    <% else %>
-      <%= link_to "Last »", url_for(base_params.merge(page: total_pages)), class: "last" %>
-    <% end %>
+  <%# 2ページ目〜最後の1つ前: <<First < 2 > Last>> %>
+  <% else %>
+    <%= link_to "<<First", url_for(base_params.merge(page: 1)),           class: "first" %>
+    <%= link_to "<",       url_for(base_params.merge(page: current - 1)), class: "prev" %>
 
+    <span class="page current"><%= current %></span>
+
+    <%= link_to ">",      url_for(base_params.merge(page: current + 1)), class: "next" %>
+    <%= link_to "Last>>", url_for(base_params.merge(page: total)),       class: "last" %>
   <% end %>
+
 </nav>
