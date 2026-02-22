@@ -24,7 +24,7 @@
     <!-- 右：商品一覧 -->
     <main style="flex:1;">
       <h1 style="margin:0 0 14px 0;">
-        <%= title %> <span style="font-size:14px; font-weight:400;">（全<%= @items_count %>件）</span>
+        <%= title %> <span style="font-size:14px; font-weight:400;">（全<%= @items.total_count %>件）</span>
       </h1>
 
       <div style="display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:18px;">
@@ -49,38 +49,9 @@
           </div>
         <% end %>
       </div>
-
-      <!-- ページネーション（自前：1ページ8件） -->
+      <!-- ページネーション（kaminari） -->
       <div style="margin-top:22px; text-align:center;">
-        <% qp = {} %>
-        <% qp[:genre_id] = @selected_genre.id if @selected_genre.present? %>
-
-        <% if @total_pages > 1 %>
-          <%# First / Prev %>
-          <% if @page > 1 %>
-            <%= link_to "First", items_path(qp.merge(page: 1)), style: "margin:0 6px;" %>
-            <%= link_to "Prev",  items_path(qp.merge(page: @page - 1)), style: "margin:0 6px;" %>
-          <% end %>
-
-          <%# number links（最大5個だけ表示：現在の周辺） %>
-          <% start_page = [@page - 2, 1].max %>
-          <% end_page   = [start_page + 4, @total_pages].min %>
-          <% start_page = [end_page - 4, 1].max %>
-
-          <% (start_page..end_page).each do |p| %>
-            <% if p == @page %>
-              <span style="margin:0 6px; font-weight:700;"><%= p %></span>
-            <% else %>
-              <%= link_to p, items_path(qp.merge(page: p)), style: "margin:0 6px;" %>
-            <% end %>
-          <% end %>
-
-          <%# Next / Last %>
-          <% if @page < @total_pages %>
-            <%= link_to "Next", items_path(qp.merge(page: @page + 1)), style: "margin:0 6px;" %>
-            <%= link_to "Last", items_path(qp.merge(page: @total_pages)), style: "margin:0 6px;" %>
-          <% end %>
-        <% end %>
+        <%= paginate @items, params: { genre_id: params[:genre_id] } %>
       </div>
     </main>
 
