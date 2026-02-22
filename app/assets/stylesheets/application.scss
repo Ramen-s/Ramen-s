@@ -1003,3 +1003,80 @@ td {
   margin-top: 80px;
 
 }
+/* =========================================================
+   Public Items Pagination (Kaminari)
+   - 画像イメージ： 1 2 3 Next > Last »
+========================================================= */
+.public-items-pagination .nc-pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* リンクは下線（ブラウザの青色はそのまま） */
+.public-items-pagination .nc-pagination a {
+  text-decoration: underline;
+}
+
+/* 現在ページは下線なし（画像の「1」っぽく） */
+.public-items-pagination .nc-pagination .current {
+  text-decoration: none;
+}
+
+/* gap(...) が出た時も崩れないように */
+.public-items-pagination .nc-pagination .gap {
+  text-decoration: none;
+}
+
+/* =========================================================
+   Public Items Pagination (Kaminari)
+   - 画像イメージ： 1 2 3 Next > Last »
+========================================================= */
+.public-items-pagination .nc-pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* リンクは下線（ブラウザの青色はそのまま） */
+.public-items-pagination .nc-pagination a {
+  text-decoration: underline;
+}
+
+/* 現在ページは下線なし（画像の「1」っぽく） */
+.public-items-pagination .nc-pagination .current {
+  text-decoration: none;
+}
+
+/* gap(...) が出た時も崩れないように */
+.public-items-pagination .nc-pagination .gap {
+  text-decoration: none;
+}
+
+/* =========================================================
+   Public Items Pagination (Kaminari)
+   - 画像イメージ： 1 2 3 Next > Last »
+========================================================= */
+.public-items-pagination .nc-pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* リンクは下線（ブラウザの青色はそのまま） */
+.public-items-pagination .nc-pagination a {
+  text-decoration: underline;
+}
+
+/* 現在ページは下線なし（画像の「1」っぽく） */
+.public-items-pagination .nc-pagination .current {
+  text-decoration: none;
+}
+
+/* gap(...) が出た時も崩れないように */
+.public-items-pagination .nc-pagination .gap {
+  text-decoration: none;
+}
