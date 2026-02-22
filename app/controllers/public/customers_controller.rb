@@ -7,7 +7,8 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = current_customer || Customer.first || Customer.new(name: "testuser", email: "test@example.com")   # 左（顧客）
-    @customer.kana
+    @customer.last_name_kana
+    @customer.first_name_kana
     @customer.postal_code
     @customer.address
     @customer.telephone_number
@@ -68,7 +69,7 @@ class Public::CustomersController < ApplicationController
 
   def customer_params
     params.require(:customer).permit(
-      :name, :last_name, :first_name, :kana,
+      :name, :last_name, :first_name, :last_name_kana, :first_name_kana,
       :postal_code, :address, :telephone_number, :email
     )
   end
