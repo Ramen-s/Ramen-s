@@ -1,8 +1,8 @@
 ja:
   views:
     pagination:
-      first: "First"
-      last: "Last >>"
+      first: "<< First"
       previous: "< Prev"
+      last: "Last >>"
       next: "Next >"
       truncate: "…"
