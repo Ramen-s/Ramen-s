@@ -55,14 +55,12 @@ Rails.application.routes.draw do
     get "homes/top"
     root "homes#top"
 
-    get 'new/items' => 'items#new', as: 'new_item'
-    resources :items, only: [:index,  :create, :show, :edit, :update]
+
+    resources :items, only: [:index, :new, :create, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
 
     resources :orders, only: [:show, :update]
     resources :order_details, only: [:update]
-    get '/' => 'homes#top'
   end
-
 end

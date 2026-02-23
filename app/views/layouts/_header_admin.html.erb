@@ -9,10 +9,7 @@
         <%#= link_to "注文履歴一覧", admin_orders_path, class: "nc-btn" %>
         <%= link_to "ジャンル一覧", admin_genres_path, class: "nc-btn" %>
 
-        <%= link_to "ログアウト",
-                    destroy_admin_session_path,
-                    data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" },
-                    class: "nc-btn" %>
+        <%= button_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nc-btn" %>
       </nav>
 
       <div class="nc-search">

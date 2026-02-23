@@ -14,17 +14,22 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
   </head>
 
   <body>
     <% if request.path.start_with?("/admin") %>
-      <%= render "layouts/header_admin" %>
+      <%# 管理側：ログイン有無でヘッダー切替 %>
+      <% if admin_signed_in? %>
+        <%= render "layouts/header_admin" %>
+      <% else %>
+        <%# ★管理者ログイン前は「会員側ログイン前」と同じヘッダーを使う %>
+        <%= render "layouts/header_public_guest" %>
+      <% end %>
     <% else %>
+      <%# 公開側：ログイン有無でヘッダー切替 %>
       <% if customer_signed_in? %>
         <%= render "layouts/header_public_customer" %>
       <% else %>

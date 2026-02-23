@@ -1,0 +1,39 @@
+<%# frozen_string_literal: true %>
+
+<% current = current_page.number %>
+<% total   = total_pages %>
+
+<% base_params = {} %>
+<% base_params[:genre_id] = params[:genre_id] if params[:genre_id].present? %>
+
+<nav class="pagination kaminari" aria-label="Pagination">
+
+  <%# 1ページ目: 1 2 Next> Last>> %>
+  <% if current == 1 %>
+    <span class="page current">1</span>
+
+    <% if total >= 2 %>
+      <%= link_to "2", url_for(base_params.merge(page: 2)), class: "page" %>
+      <%= link_to "Next>",  url_for(base_params.merge(page: 2)),     class: "next" %>
+      <%= link_to "Last>>", url_for(base_params.merge(page: total)), class: "last" %>
+    <% end %>
+
+  <%# 最後のページ: <Prev <<First %>
+  <% elsif current == total %>
+    <% if total >= 2 %>
+      <%= link_to "<Prev",   url_for(base_params.merge(page: current - 1)), class: "prev" %>
+      <%= link_to "<<First", url_for(base_params.merge(page: 1)),           class: "first" %>
+    <% end %>
+
+  <%# 2ページ目〜最後の1つ前: <<First < 2 > Last>> %>
+  <% else %>
+    <%= link_to "<<First", url_for(base_params.merge(page: 1)),           class: "first" %>
+    <%= link_to "<",       url_for(base_params.merge(page: current - 1)), class: "prev" %>
+
+    <span class="page current"><%= current %></span>
+
+    <%= link_to ">",      url_for(base_params.merge(page: current + 1)), class: "next" %>
+    <%= link_to "Last>>", url_for(base_params.merge(page: total)),       class: "last" %>
+  <% end %>
+
+</nav>

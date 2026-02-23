@@ -1,0 +1,13 @@
+/* =========================================================
+   Welcome Message Position
+   ※application.scss はそのまま。ここは「追加CSS」だけ置く
+========================================================= */
+
+/* ようこそメッセージ（LOGOと右側ボタンの間で中央寄せ） */
+.nc-header__welcome {
+  flex: 1;                 /* 間のスペースを担当させる */
+  text-align: center;      /* 文字を中央へ */
+  margin: 0 24px;          /* LOGOに寄りすぎ防止 */
+  white-space: nowrap;     /* 1行固定 */
+  align-self: center;      /* 上下位置だけ中央 */
+}

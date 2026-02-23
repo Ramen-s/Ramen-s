@@ -10,9 +10,9 @@
           ジャンル検索
         </div>
         <div style="padding:10px 12px;">
-          <ul style="list-style:none; padding-left:0; margin:0;">
+          <ul class="genre-box__list">
             <% @genres.each do |genre| %>
-              <li style="margin:6px 0;">
+              <li>
                 <%= link_to genre.name, items_path(genre_id: genre.id) %>
               </li>
             <% end %>
@@ -24,17 +24,23 @@
     <!-- 右：商品一覧 -->
     <main style="flex:1;">
       <h1 style="margin:0 0 14px 0;">
-        <%= title %> <span style="font-size:14px; font-weight:400;">（全<%= @items_count %>件）</span>
+        <%= title %> <span style="font-size:14px; font-weight:400;">（全<%= @items.total_count %>件）</span>
       </h1>
 
       <div style="display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:18px;">
         <% @items.each do |item| %>
           <div>
-            <!-- 画像未実装：枠だけ -->
-            <div style="border:1px solid #ddd; background:#f3f3f3; height:120px;"></div>
+            <!-- 画像 -->
+            <div style="border:1px solid #ddd; background:#f3f3f3; height:120px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+              <% if item.image.attached? %>
+                <%= image_tag item.image, style: "width:100%; height:100%; object-fit:cover; display:block;" %>
+              <% else %>
+                <div style="color:#777; font-size:12px;">No Image</div>
+              <% end %>
+            </div>
 
             <div style="margin-top:8px;">
-              <%= link_to item.name, item_path(item) %>
+              <%= link_to item.name, item_path(item), style: "color:#000; text-decoration:none;" %>
             </div>
 
             <div style="margin-top:4px; font-weight:600;">
@@ -42,6 +48,10 @@
             </div>
           </div>
         <% end %>
+      </div>
+      <!-- ページネーション（kaminari） -->
+      <div  class="admin-items-pagination" style="margin-top:22px; text-align:center;">
+         <%= paginate @items %>
       </div>
     </main>
 

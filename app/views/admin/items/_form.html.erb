@@ -9,51 +9,74 @@
     </div>
   <% end %>
 
-  <div class="form-group mb-3">
-    <%= f.label :image, "商品画像", class: "col-sm-3 col-form-label" %>
-    <%= f.file_field :image, accept: "image/*", class: "form-control-file" %>
+  <div class="admin-item-form__row">
+    <div class="admin-item-form__label">
+      <%= f.label :image, "商品画像" %>
+    </div>
+    <div class="admin-item-form__field">
+      <%= f.file_field :image, accept: "image/*" %>
+    </div>
   </div>
 
-  <div class="form-group mb-3">
-    <%= f.label :name, "商品名", class: "col-sm-3 col-form-label" %>
-    <%= f.text_field :name, class: "form-control", placeholder: "商品名を入力" %>
+  <div class="admin-item-form__row">
+    <div class="admin-item-form__label">
+      <%= f.label :name, "商品名" %>
+    </div>
+    <div class="admin-item-form__field">
+      <%= f.text_field :name, class: "admin-item-form__input", placeholder: "商品名を入力" %>
+    </div>
   </div>
 
-  <div class="form-group mb-3">
-    <%= f.label :introduction, "商品説明", class: "col-sm-3 col-form-label" %>
-    <%= f.text_area :introduction, class: "form-control", rows: 5, placeholder: "説明文を入力" %>
+  <div class="admin-item-form__row">
+    <div class="admin-item-form__label">
+      <%= f.label :introduction, "商品説明" %>
+    </div>
+    <div class="admin-item-form__field">
+      <%= f.text_area :introduction, class: "admin-item-form__textarea", rows: 6, placeholder: "説明文を入力" %>
+    </div>
   </div>
 
-  <div class="form-group mb-3">
-    <%= f.label :genre_id, "ジャンル", class: "col-sm-3 col-form-label" %>
-    <%= f.collection_select :genre_id, Genre.all, :id, :name, {include_blank: "-- 選択してください --"}, {class: "form-control custom-select"} %>
+  <div class="admin-item-form__row">
+    <div class="admin-item-form__label">
+      <%= f.label :genre_id, "ジャンル" %>
+    </div>
+    <div class="admin-item-form__field">
+      <%= f.collection_select :genre_id, Genre.all, :id, :name,
+            { include_blank: "-- 選択してください --" },
+            { class: "admin-item-form__select" } %>
+    </div>
   </div>
 
-  <div class="form-group mb-3">
-    <%= f.label :price, "税抜価格", class: "col-sm-3 col-form-label" %>
-    <div class="input-group w-50">
-      <%= f.number_field :price, class: "form-control", placeholder: "1000" %>
-      <div class="input-group-append">
-        <span class="input-group-text">円</span>
+  <div class="admin-item-form__row">
+    <div class="admin-item-form__label">
+      <%= f.label :price, "税抜価格" %>
+    </div>
+    <div class="admin-item-form__field">
+      <div class="admin-item-form__price">
+        <%= f.number_field :price, class: "admin-item-form__input admin-item-form__input--price", placeholder: "1000" %>
+        <span class="admin-item-form__yen">円</span>
       </div>
     </div>
   </div>
 
-  <div class="form-group mb-4">
-    <%= f.label :is_active, "販売ステータス", class: "col-sm-3 col-form-label" %>
-    <div class="form-check form-check-inline">
-      <%= f.radio_button :is_active, true, class: "form-check-input", checked: true %>
-      <%= f.label :is_active_true, "販売中", class: "form-check-label text-success font-weight-bold" %>
+  <div class="admin-item-form__row">
+    <div class="admin-item-form__label">
+      販売ステータス
     </div>
-    <div class="form-check form-check-inline">
-      <%= f.radio_button :is_active, false, class: "form-check-input" %>
-      <%= f.label :is_active_false, "販売停止中", class: "form-check-label text-secondary" %>
+    <div class="admin-item-form__field">
+      <label class="admin-item-form__radio">
+        <%= f.radio_button :is_active, true %>
+        <span class="admin-item-form__radio-text is-active">販売中</span>
+      </label>
+
+      <label class="admin-item-form__radio">
+        <%= f.radio_button :is_active, false %>
+        <span class="admin-item-form__radio-text is-inactive">販売停止中</span>
+      </label>
     </div>
   </div>
 
-  <%# 修正後：ボタンの文字を状況に合わせて変える %>
-  <div class="text-center mt-4">
-    <%= f.submit item.new_record? ? "新規登録" : "変更を保存", 
-               class: "btn btn-success px-5" %>
+  <div class="admin-item-form__actions">
+    <%= f.submit item.new_record? ? "新規登録" : "変更を保存", class: "btn btn-success admin-item-form__submit" %>
   </div>
 <% end %>
