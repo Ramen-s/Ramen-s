@@ -23,8 +23,10 @@ class Public::CustomersController < ApplicationController
 
   def withdraw
     @customer.update!(is_active: false)  # ← customer じゃなく @customer
-    sign_out current_customer
-    redirect_to root_path, notice: "退会しました。"
+
+    reset_session
+    flash[:notice] = "退会処理が完了しました。"
+    redirect_to root_path
   end
 
   private
