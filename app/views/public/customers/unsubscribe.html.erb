@@ -8,6 +8,9 @@
   </p>
 
   <%= link_to "退会しない", customers_information_edit_path, class: "btn btn-primary btn-sm customer-show-btn" %>
-  <%= link_to "退会する", root_path, class: "btn btn-danger btn-sm customer-show-btn" %>
+  <%= link_to "退会する", customers_withdraw_path,
+              method: :patch,
+              data:{confirm: "本当に退会しますか？"},
+              class: "btn btn-danger btn-sm customer-show-btn" %>
 
 </div>
