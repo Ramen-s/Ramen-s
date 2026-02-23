@@ -59,9 +59,12 @@ end
   end
 
   def index
+    @orders = current_customer.orders.order(created_at: :desc)
   end
 
   def show
+    @order = Order.find(params[:id])
+    @order_details = @order.order_details
   end
 
   private
